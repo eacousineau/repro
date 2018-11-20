@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 #
 #  Syntax:
@@ -6,6 +5,8 @@
 #
 #  Extract documentation from C++ header files to use it in Python bindings
 #
+
+
 
 from collections import OrderedDict, defaultdict
 from fnmatch import fnmatch
@@ -15,6 +16,10 @@ import re
 import sys
 from tempfile import NamedTemporaryFile, mkdtemp
 import textwrap
+
+if sys.version_info.major == 2:
+    os.execv(["/usr/bin/python3"] + sys.argv)
+
 
 from clang import cindex
 from clang.cindex import AccessSpecifier, CursorKind
