@@ -1,4 +1,4 @@
-#include "sample/sample.h"
+#include "sample.h"
 
 namespace sample {
 

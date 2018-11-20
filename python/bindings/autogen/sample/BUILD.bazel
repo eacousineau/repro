@@ -1,13 +1,15 @@
-load("//pybind11_ext:pybind.bzl", "generate_pybind11_documentation")
+load("//pybind11_ext:pybind.bzl", "generate_pybind_documentation_header")
 
 cc_library(
     name = "sample",
     hdrs = ["sample.h"],
     srcs = ["sample.cc"],
+    includes = ["."],
 )
 
-generate_pybind11_documentation(
+generate_pybind_documentation_header(
     name = "gen_doc",
     targets = [":sample"],
+    out = "sample_doc.h",
     root_name = "sample_doc",
 )

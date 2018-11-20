@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # -*- coding: UTF-8 -*-
 #
 #  Syntax:
@@ -876,6 +878,7 @@ def main():
                 include_file = filename[len(prefix):]
                 break
         else:
+            eprint("\n".join(include_paths))
             raise RuntimeError(
                 "Filename not incorporated into -I includes: {}".format(
                     filename))

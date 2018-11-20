@@ -1,4 +1,5 @@
 load(":pybind.bzl", "pybind_py_library")
+load("//third_party:drake_runfiles_binary.bzl", "drake_runfiles_binary")
 
 py_library(
     name = "module_py",
@@ -74,7 +75,15 @@ cc_library(
 )
 
 py_binary(
-    name = "mkdoc",
+    name = "_mkdoc",
     srcs = ["mkdoc.py"],
+    main = "mkdoc.py",
     deps = ["//third_party:clang_py"],
 )
+
+drake_runfiles_binary(
+    name = "mkdoc",
+    target = ":_mkdoc",
+    visibility = ["//visibility:public"],
+)
+
