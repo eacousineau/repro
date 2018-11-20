@@ -6,7 +6,7 @@
 #  Extract documentation from C++ header files to use it in Python bindings
 #
 
-
+from __future__ import print_function
 
 from collections import OrderedDict, defaultdict
 from fnmatch import fnmatch
@@ -18,8 +18,8 @@ from tempfile import NamedTemporaryFile, mkdtemp
 import textwrap
 
 if sys.version_info.major == 2:
-    os.execv(["/usr/bin/python3"] + sys.argv)
-
+    argv = ["/usr/bin/python3"] + sys.argv
+    os.execv(argv[0], argv)
 
 from clang import cindex
 from clang.cindex import AccessSpecifier, CursorKind
@@ -675,7 +675,7 @@ def choose_doc_var_names(symbols):
 
     def specialize_well_known_doc_var_names():
         # Force well-known methods to have well-known names.
-        nonlocal symbols, result
+        # nonlocal symbols, result
         for i, sym in enumerate(symbols):
             if sym.cursor.is_copy_constructor():
                 result[i] = "doc_copy"

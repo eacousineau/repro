@@ -72,3 +72,9 @@ cc_library(
         ":pybind11_ext_pybind",
     ],
 )
+
+py_binary(
+    name = "mkdoc",
+    srcs = ["mkdoc.py"],
+    deps = ["//third_party:clang_py"],
+)

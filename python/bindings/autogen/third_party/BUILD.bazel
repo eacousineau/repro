@@ -1,0 +1,6 @@
+py_library(
+    name = "clang_py",
+    srcs = glob(["clang/*.py"]),
+    imports = ["."],
+    visibility = ["//visibility:public"],
+)
