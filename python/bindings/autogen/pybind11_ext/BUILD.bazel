@@ -1,0 +1,65 @@
+load(":pybind.bzl", "pybind_py_library")
+
+py_library(
+    name = "module_py",
+    srcs = ["__init__.py"],
+)
+
+cc_library(
+    name = "type_pack",
+    hdrs = ["type_pack.h"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "wrap_function",
+    hdrs = ["wrap_function.h"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "wrap_pybind",
+    hdrs = ["wrap_pybind.h"],
+    visibility = ["//visibility:public"],
+    deps = [":wrap_function"],
+)
+
+# ODR does not matter, because the singleton will be stored in Python.
+cc_library(
+    name = "cpp_param_pybind",
+    srcs = ["cpp_param_pybind.cc"],
+    hdrs = ["cpp_param_pybind.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":type_pack",
+        "@pybind11",
+    ],
+)
+
+py_library(
+    name = "cpp_param_py",
+    srcs = ["cpp_param.py"],
+    deps = [
+        ":module_py",
+    ],
+)
+
+py_library(
+    name = "cpp_template_py",
+    srcs = ["cpp_template.py"],
+    deps = [
+        ":cpp_param_py",
+        ":module_py",
+    ],
+)
+
+cc_library(
+    name = "cpp_template_pybind",
+    srcs = [],
+    hdrs = ["cpp_template_pybind.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":cpp_param_pybind",
+        "@pybind11",
+    ],
+)

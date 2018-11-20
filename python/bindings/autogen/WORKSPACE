@@ -1,0 +1,16 @@
+workspace(name = "autogen")
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load(":python.bzl", "python_repository")
+
+python_repository(name = "python")
+
+http_archive(
+    name = "pybind11",
+    urls = ["https://github.com/{repository}/archive/{commit}.tar.gz".format(
+        repository = "RobotLocomotion/pybind11",
+        commit = "5501496d6984d81bef3a0dacd9a2e368d544bfce")],
+    strip_prefix = "pybind11-5501496d6984d81bef3a0dacd9a2e368d544bfce",
+    sha256 = "03f880238bdd4c29536448eb3999a75d38ff677ed1b3e38cdca0e8fd35753262",
+    build_file = "@autogen//:pybind11.BUILD.bazel",
+)
