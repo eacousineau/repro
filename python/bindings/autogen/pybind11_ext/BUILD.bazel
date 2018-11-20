@@ -6,6 +6,12 @@ py_library(
 )
 
 cc_library(
+    name = "pybind11_ext_pybind",
+    hdrs = ["pybind11_ext_pybind.h"],
+    deps = ["@pybind11"],
+)
+
+cc_library(
     name = "type_pack",
     hdrs = ["type_pack.h"],
     visibility = ["//visibility:public"],
@@ -21,7 +27,10 @@ cc_library(
     name = "wrap_pybind",
     hdrs = ["wrap_pybind.h"],
     visibility = ["//visibility:public"],
-    deps = [":wrap_function"],
+    deps = [
+        ":wrap_function",
+        ":pybind11_ext_pybind",
+    ],
 )
 
 # ODR does not matter, because the singleton will be stored in Python.
@@ -32,7 +41,7 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         ":type_pack",
-        "@pybind11",
+        ":pybind11_ext_pybind",
     ],
 )
 
@@ -60,6 +69,6 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         ":cpp_param_pybind",
-        "@pybind11",
+        ":pybind11_ext_pybind",
     ],
 )

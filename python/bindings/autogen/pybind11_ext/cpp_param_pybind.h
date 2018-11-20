@@ -9,6 +9,7 @@
 
 #include "pybind11/pybind11.h"
 
+#include "pybind11_ext/pybind11_ext_pybind.h"
 #include "pybind11_ext/type_pack.h"
 
 namespace pybind11_ext {

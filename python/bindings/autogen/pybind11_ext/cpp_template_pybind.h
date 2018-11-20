@@ -9,6 +9,7 @@
 
 // `GetPyTypes` is implemented specifically for `cpp_template`; to simplify
 // dependencies, this is included transitively.
+#include "pybind11_ext/pybind11_ext_pybind.h"
 #include "pybind11_ext/cpp_param_pybind.h"
 
 namespace pybind11_ext {

@@ -10,7 +10,7 @@
 #include <typeinfo>
 #include <utility>
 
-namespace drake {
+namespace pybind11_ext {
 
 template <typename ... Ts>
 struct type_pack;
@@ -108,7 +108,7 @@ struct type_pack {
 
   /// Extracts the Ith type from this sequence.
   template <size_t I>
-  using type_at = typename drake::type_at<I, Ts...>::type;
+  using type_at = typename pybind11_ext::type_at<I, Ts...>::type;
 };
 
 /// Returns an expression (only to be used in `decltype`) for inferring
@@ -184,4 +184,4 @@ constexpr size_t type_hash() {
   return std::type_index(typeid(T)).hash_code();
 }
 
-}  // namespace drake
+}  // namespace pybind11_ext
